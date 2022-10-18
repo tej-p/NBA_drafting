@@ -1,0 +1,101 @@
+body{
+    margin: 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav {
+    background-color: #fdd660;
+    border: 1px solid transparent;
+    height: 45px;
+    padding: 10px; 
+    display: flex; 
+}
+
+#logo{
+    width: 80px;
+    
+}
+
+.nav >div{
+    margin-left: 30%;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav > div> a{
+    color: #24428a;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 20px;
+    margin-top: 4%;
+    font-family: Georgia, 'Times New Roman', Times, serif
+
+}
+
+.search{
+    margin: 3% 38% 0%;
+    padding: 0px;
+    width: 270px;
+}
+
+#text{
+    width: 210px;
+    height: 20px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: 2px solid #24428a;;
+}
+
+#btn_search{
+    width: 40px;
+    height: 35px;
+    border: 2px solid #24428a;
+    
+}
+#btn_search > img{
+    width: 20px;
+}
+
+#main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+    padding: 50px;
+
+}
+
+.player{
+    width: 200px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 5px;
+    padding: 20px 10px;
+    color: rgb(170, 0, 255);
+    font-weight: bolder;
+    background-color: #f5f5dc;
+}
+
+.photo{
+    border-radius: 50%;
+}
+
+.btn{
+    width: 150px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #fdc111;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+    padding: 50px;
+
+}
+

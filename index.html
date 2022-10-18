@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!---------------------------------------Navbar------------------------------------------------->
+      <div class="nav">
+        <a class="home" href="./index.html">
+          <img src="./logo.webp" id="logo" alt="">
+        </a>
+         <div>
+          <a href="index.html">PLAYERS</a>
+          <a href="games.html">GAMES</a>
+         </div> 
+      </div>
+
+      <div class="search">
+        <input id="text" type="text">
+        <button id="btn_search"><img src="./sear.png" alt=""></button>
+      </div>
+
+    <!----------------------------main div -------------------------------------------------------- -->
+      <div id="main"></div>
+  </body>
+</html>
+<script>
+
+    
+    var main = document.getElementById("main");
+
+    // ----------------get all player------------------------------------------------------------------------
+
+    async function getPlayers(){
+        try{
+            let res = await fetch("https://www.balldontlie.io/api/v1/players?per_page=12");
+            let data = await res.json();
+          
+            var playersArr = data.data;
+            console.log("playersArr : ", playersArr);
+            
+            displayData(playersArr)
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+    getPlayers();
+
+
+
+    function displayData(Arr) {
+
+       main.innerHTML = "";
+        Arr.map(function(el){
+          
+            var div = document.createElement('div');
+            div.setAttribute("class", 'player');
+
+            var img = document.createElement('img');
+            img.src = `https://via.placeholder.com/150/fdc111/FFFFFF/?text=${el.first_name}+${el.last_name}`;
+            img.className = 'photo';
+
+            var h2 = document.createElement('h2');
+            h2.innerText = el.first_name +" "+ el.last_name;
+            
+
+            var h1 = document.createElement('div');
+            h1.innerText = "Position : "+el.position;
+
+            var btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerText = "Team Details";
+
+            div.append(img, h2, h1, btn);
+            main.append(div);
+        })
+    } 
+
+     // ----------------get player by name-------------------------------------------------------------------------
+
+    async function getPlayer(name){
+        try{
+            let res = await fetch(`https://www.balldontlie.io/api/v1/players?search=${name}`);
+            let data = await res.json();
+          
+            var playerArr = data.data;
+            console.log("playerArr : ", playerArr);
+            
+            displayData(playerArr)
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+    
+    
+    document.getElementById("btn_search").addEventListener("click", findPlayer)
+
+    function findPlayer () {
+      var playerName = document.getElementById("text").value;
+      getPlayer(playerName);
+ 
+    }
+
+    
+
+
+</script>

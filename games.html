@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!---------------------------------------Navbar------------------------------------------------->
+      <div class="nav">
+        <a class="home" href="./index.html">
+          <img src="./logo.webp" id="logo" alt="">
+        </a>
+         <div>
+          <a href="index.html">PLAYERS</a>
+          <a href="games.html">GAMES</a>
+         </div> 
+      </div>
+
+    <!----------------------------main div -------------------------------------------------------- -->
+      <div id="container"></div>
+      
+  </body>
+</html>
+<script>
+
+    
+    var container = document.getElementById("container")
+
+    async function getGames(){
+        try{
+            let res = await fetch("https://www.balldontlie.io/api/v1/games");
+            let data = await res.json();
+          
+            var gamesArr = data.data;
+            console.log("gamesArr : ", gamesArr);
+            
+            displayData(gamesArr)
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+
+    getGames();
+
+    function displayData(Arr) {
+        container.innerHTML = "";
+
+        Arr.map(function(el){
+          
+            var div = document.createElement('div');
+            div.setAttribute("class", 'gameDiv');
+
+            var team1 = document.createElement('div');
+            team1.setAttribute("class", 'team1');
+
+            var hTeam = document.createElement('hTeam');
+            hTeam.innerText = el.home_team.full_name;
+
+            var team2 = document.createElement('div');
+            team2.setAttribute("class", 'team2');
+
+            var vTeam = document.createElement('vTeam');
+            vTeam.innerText = el.home_team.full_name;
+            
+
+            // var h1 = document.createElement('div');
+            // h1.innerText = "Position : "+el.position;
+            team1.append(hTeam);
+            team2.append(vTeam);
+            div.append(team1, team2);
+            container.append(div);
+        })
+    }  
+    
+
+
+</script>
